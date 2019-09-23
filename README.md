@@ -5,7 +5,7 @@ Miguel Grinberg's Flask App tutorial:
 https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-i-hello-world
 
 I decided to create my own rendition of the project by
-adding an administrator console, removing the blogs/posts, and create a template for an IT infrastructure to 
+adding an administrator console, removing the blogs/posts, and creating a template for an IT infrastructure to 
 use a database system for tracking inventory.
 
 I wanted to make something that could be easily
@@ -46,6 +46,7 @@ Create all databases by issuing the following command:
 
 ```bash
 db.create_all()
+db.session.commit()
 ```
 
 To run this application, navigate to root of the project directory, and use the terminal to issue the following commands:
