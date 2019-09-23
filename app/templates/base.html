@@ -1,0 +1,77 @@
+{% extends 'bootstrap/base.html' %}
+{% block title %}
+	{% if title %}{{ title }} - IT Inventory DB{% else %}Welcome to IT Inventory DB{% endif %}
+{% endblock %}
+
+{% block navbar %}
+	<nav class="navbar navbar-default">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="{{ url_for('index') }}">IT Inventory DB</a>
+			</div>
+			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+				<ul class="nav navbar-nav">
+					<li><a href="{{ url_for('index') }}">Home</a></li>
+					<li><a href="{{ url_for('manage_users') }}">Admin Console</a></li>
+					<li class="dropdown">
+						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Import
+						<span class="caret"></span></a>
+						<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+							<li><a href="{{ url_for('import_user') }}">Import Users</a></li>
+							<li><a href="{{ url_for('add_item') }}">Import Inventory Item</a></li>
+							<li><a href="{{ url_for('add_toner') }}">Import Printer Toner</a><li>
+					  	</ul>
+					</li>
+					<li class="dropdown">
+						  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Search
+						  <span class="caret"></span></a>
+						<ul class="dropdown-menu" aria-labelledby="navbarDropdown1">
+							<li><a href="{{ url_for('search_results') }}">Search Users</a></li>
+							<li><a href="{{ url_for('search_inventory') }}">Search Inventory</a></li>
+							<li><a href="{{ url_for('search_toner') }}">Search Printer Toner</a></li>
+							<li><a href="{{ url_for('search_checkout') }}">Search Checkout</a></li>
+						</ul>
+					<li><a href="{{ url_for('checkout') }}">Check Out Items</a></li>
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+					{% if current_user.is_anonymous %}
+					<li><a href="{{ url_for('login') }}">Login</a></li>
+					{% else %}
+					<li><a href="{{ url_for('user', username=current_user.username) }}">Profile</a></li>
+					<li><a href="{{ url_for('logout') }}">Logout</a></li>
+					{% endif %}
+				</ul>
+			</div>
+		</div>
+	</nav>
+
+{% endblock %}
+{% block content %}
+		<div class="container">
+		{% with messages = get_flashed_messages() %}
+		{% if messages %}
+			{% for message in messages %}
+			<div class="alert alert-info" role="alert">{{ message }}</div>
+			{% endfor %}
+		{% endif %}
+		{% endwith %}
+			{# application content needs to be provided in the app_content block #}
+			{% block app_content %}{% endblock %}
+		</div>
+{% endblock %}
+
+{% block styles %}
+{{super()}}
+<link rel="stylesheet" href="{{url_for('.static', filename='mystyle.css')}}">
+{% endblock %}
+
+{% block scripts %}
+{{super()}}
+{{ moment.include_moment() }}
+{% endblock %}
