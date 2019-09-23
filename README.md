@@ -28,7 +28,7 @@ pip install -r requirements.txt
 
 I did not include the migrations folder because that needs to be initialized based on your system's configuration. 
 Before running the application, please make sure that Flask-Migrate was successfully installed. Open a terminal,
-and issue the following commands:
+and issue the following commands in the root of the project directory:
 
 ```bash
 flask db init
@@ -48,7 +48,7 @@ Create all databases by issuing the following command:
 db.create_all()
 ```
 
-To run this application, navigate to root of the project folder, and use the terminal to issue the following commands:
+To run this application, navigate to root of the project directory, and use the terminal to issue the following commands:
 
 ```bash
 export FLASK_APP=inventory.py
