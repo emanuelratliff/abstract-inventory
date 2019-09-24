@@ -467,7 +467,7 @@ def delete_inventory(other_item_name):
 def checkout():
     if current_user.is_authenticated:
         form = CheckOutForm(request.form)
-        form.select_field.choices = [(u.employee_id, u.last_name + ',' + u.first_name) for u in Users.query.all()]
+        form.select_field.choices = [(u.employee_id, u.last_name + ',' + u.first_name) for u in Users.query.order_by(Users.last_name).all()]
         target = request.form.get('select_field')
         target1 = form.checkout_asset_tag.data
         item = Other.query.filter_by(other_asset_tag=target1).first()
