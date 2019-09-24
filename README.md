@@ -27,10 +27,11 @@ pip install -r requirements.txt
 ```
 
 I did not include the migrations folder because that needs to be initialized based on your system's configuration. 
-Before running the application, please make sure that Flask-Migrate was successfully installed. Open a terminal,
+Before running the application, please make sure that Flask-Migrate and all dependencies were successfully installed. Open a terminal,
 and issue the following commands in the root of the project directory:
 
 ```bash
+flask db init
 flask db migrate
 flask db upgrade
 ```
