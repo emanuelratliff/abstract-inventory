@@ -34,6 +34,7 @@ and issue the following commands in the root of the project directory:
 flask db init
 flask db migrate
 flask db upgrade
+export FLASK_APP=inventory.py
 ```
 
 Once completed, navigate to the terminal and open the flask shell:
