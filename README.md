@@ -31,7 +31,6 @@ Before running the application, please make sure that Flask-Migrate was successf
 and issue the following commands in the root of the project directory:
 
 ```bash
-flask db init
 flask db migrate
 flask db upgrade
 ```
