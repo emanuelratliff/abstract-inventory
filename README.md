@@ -61,7 +61,7 @@ However, you can add yourself as an admin via the terminal using flask shell. Th
 
 ```bash
 flask shell
-admin = Admin(str(User.query.filter_by(User.username == '<insert your user name here>').username), admin_username=User.query.filter_by(User.username == '<insert your username here>'))
+admin = Admin(str(User.query.filter_by(User.username == '<insert your user name here>').username), admin_username=User.query.filter_by(User.username == '<insert your user name here>'))
 db.session.add(admin)
 db.session.commit()
 ```
