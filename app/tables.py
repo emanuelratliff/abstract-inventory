@@ -45,14 +45,4 @@ class TonerInventory(Table):
     toner_quantity = Col('Quantity')
     edit = LinkCol('Edit', 'edit_toner', url_kwargs=dict(cartridge='toner_cartridge'))
     delete = ButtonCol('Delete', 'delete_toner', url_kwargs=dict(cartridge='toner_cartridge'))
-    
-    # This function is used as a way to conditionally format the Toner table. If the toner item falls under 3, 
-    # it will mark the row a shade of red. The important class can be changed in the mystyle.css file
-    # located in the static folder
-    
-    def get_tr_attrs(self, item):
-        toner = Toner.query.all()
-        for i in toner:
-            if i.toner_quantity < 3:
-                return {'class': 'important'}
-    
+   
