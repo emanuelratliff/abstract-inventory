@@ -48,6 +48,10 @@
     border-bottom-color: #555;
 }
 
+.important {
+    background-color: #ff9d96;
+}
+
 /* Mobile version */
 .navbar-default .navbar-toggle {
     border-color: #DDD;
