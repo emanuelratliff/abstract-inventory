@@ -416,8 +416,8 @@ def search_inventory():
         .order_by(Other.other_item_name).paginate(page, app.config['RESULTS_PER_PAGE'], False)
 
     table = Inventory(results.items, border=True)
-    next_url = url_for('search_results', page=results.next_num) if results.has_next else None
-    prev_url = url_for('search_results', page=results.prev_num) if results.has_prev else None
+    next_url = url_for('search_inventory', page=results.next_num) if results.has_next else None
+    prev_url = url_for('search_inventory', page=results.prev_num) if results.has_prev else None
 
     return render_template('search_inventory.html', table=table, title='Search Inventory',
                            next_url=next_url, prev_url=prev_url, results=results)
@@ -509,8 +509,8 @@ def search_checkout():
                                CheckOut.checkout_asset_tag)\
         .order_by(CheckOut.checkout_username).paginate(page, app.config['RESULTS_PER_PAGE'], False)
     table = Checkout(results.items, border=True)
-    next_url = url_for('search_results', page=results.next_num) if results.has_next else None
-    prev_url = url_for('search_results', page=results.prev_num) if results.has_prev else None
+    next_url = url_for('search_checkout', page=results.next_num) if results.has_next else None
+    prev_url = url_for('search_checkout', page=results.prev_num) if results.has_prev else None
 
     return render_template('search_checkout.html', table=table, title='Search Checkout',
                            next_url=next_url, prev_url=prev_url, results=results)
@@ -565,8 +565,8 @@ def search_toner():
         .order_by(Toner.toner_model).paginate(page, app.config['RESULTS_PER_PAGE'], False)
 
     table = TonerInventory(results.items, border=True)
-    next_url = url_for('search_results', page=results.next_num) if results.has_next else None
-    prev_url = url_for('search_results', page=results.prev_num) if results.has_prev else None
+    next_url = url_for('search_toner', page=results.next_num) if results.has_next else None
+    prev_url = url_for('search_toner', page=results.prev_num) if results.has_prev else None
 
     return render_template('search_checkout.html', table=table, title='Search Checkout',
                            next_url=next_url, prev_url=prev_url, results=results)
