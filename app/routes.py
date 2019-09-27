@@ -568,7 +568,7 @@ def search_toner():
     next_url = url_for('search_toner', page=results.next_num) if results.has_next else None
     prev_url = url_for('search_toner', page=results.prev_num) if results.has_prev else None
 
-    return render_template('search_checkout.html', table=table, title='Search Checkout',
+    return render_template('search_toner.html', table=table, title='Search Toner',
                            next_url=next_url, prev_url=prev_url, results=results)
 
 # Allows you to edit a toner item
