@@ -402,7 +402,7 @@ def add_item():
                     inventory.other_item_name) + ' ' +
                 '[Item Serial Number]: ' + str(inventory.other_serial_number) + ' ' +
                 '[Item Asset Tag]: ' + str(inventory.other_asset_tag))
-            flash('{} added to MIS inventory'.format(inventory.other_item_name))
+            flash('{} added to inventory'.format(inventory.other_item_name))
             return redirect(url_for('add_item'))
     return render_template('add_item.html', title='Add Item', form=form)
 
@@ -549,7 +549,7 @@ def add_toner():
                 '[Toner Cartridge]: ' + str(inventory.toner_cartridge) + ' ' +
                 '[Toner Color]: ' + str(inventory.toner_color) + ' ' +
                 '[Toner Quantity]: ' + str(inventory.toner_quantity))
-            flash('{} added to MIS inventory'.format(inventory.toner_cartridge))
+            flash('{} added to inventory'.format(inventory.toner_cartridge))
             return redirect(url_for('add_toner'))
     return render_template('toner.html', title='Import Toner', form=form)
 
