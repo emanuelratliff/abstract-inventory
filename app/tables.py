@@ -43,6 +43,6 @@ class TonerInventory(Table):
     toner_cartridge = Col('Cartridge Type')
     toner_color = Col('Color')
     toner_quantity = Col('Quantity')
-    edit = LinkCol('Edit', 'edit_toner', url_kwargs=dict(cartridge='toner_cartridge'))
-    delete = ButtonCol('Delete', 'delete_toner', url_kwargs=dict(cartridge='toner_cartridge'))
+    edit = LinkCol('Edit', 'edit_toner', url_kwargs=dict(ids='toner_id'))
+    delete = ButtonCol('Delete', 'delete_toner', url_kwargs=dict(ids='toner_id'))
    
