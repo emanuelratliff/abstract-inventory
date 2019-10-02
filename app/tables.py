@@ -23,8 +23,8 @@ class Inventory(Table):
     other_item_name = Col('Item Name')
     other_serial_number = Col('Item Serial Number')
     other_asset_tag = Col('Item Asset Tag')
-    edit = LinkCol('Edit', 'edit_inventory', url_kwargs=dict(other_item_name='other_item_name'))
-    delete = ButtonCol('Delete', 'delete_inventory', url_kwargs=dict(other_item_name='other_item_name'))
+    edit = LinkCol('Edit', 'edit_inventory', url_kwargs=dict(ids='others_id'))
+    delete = ButtonCol('Delete', 'delete_inventory', url_kwargs=dict(ids='others_id'))
 
 class Checkout(Table):
     classes = ['table', 'table-striped', 'table-bordered', 'table-condensed', 'table-hover']
