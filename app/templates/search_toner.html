@@ -1,6 +1,36 @@
 {% extends "base.html" %}
 {% block app_content %}
-	{{ table }}
+	<table class="table table-striped table-bordered table-condensed table-hover">
+		<tr>
+			<thead>
+				<th>Printer Model</th>
+				<th>Toner Cartridge</th>
+				<th>Toner Color</th>
+				<th>Toner Quantity</th>
+				<th>Edit</th>
+				<th>Delete</th>
+			</thead>
+		</tr>
+		{% for item in results.items %}
+		<tr>
+			{% if item.toner_quantity < 3 %}
+				<td class="important">{{ item.toner_model }}</td>
+				<td class="important">{{ item.toner_cartridge }}</td>
+                        	<td class="important">{{ item.toner_color }}</td>
+                        	<td class="important">{{ item.toner_quantity }}</td>
+                        	<td class="important"><a href={{ url_for('edit_toner', ids=item.toner_id) }}>Edit</a></td>
+                        	<td class="important"><form action={{ url_for('delete_toner', ids=item.toner_id) }}><button type="submit">Delete</button></form></td>
+                	{% else %}
+                        	<td>{{ item.toner_model }}</td>
+                        	<td>{{ item.toner_cartridge }}</td>
+                        	<td>{{ item.toner_color }}</td>
+                        	<td>{{ item.toner_quantity }}</td>
+<td><a href={{ url_for('edit_toner', ids=item.toner_id) }}>Edit</a></td>
+                        <td><form action={{ url_for('delete_toner', ids=item.toner_id) }}><button type="submit">Delete</button></form></td>
+			{% endif %}
+		</tr>
+		{% endfor %}
+</table>
 
 	<nav aria-label="...">
 		<ul class="pager">
