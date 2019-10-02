@@ -411,7 +411,7 @@ def add_item():
 @login_required
 def search_inventory():
     page = request.args.get('page', 1, type=int)
-    results = db.session.query(Other.other_item_name, Other.other_serial_number,
+    results = db.session.query(Other.others_id, Other.other_item_name, Other.other_serial_number,
                                Other.other_asset_tag)\
         .order_by(Other.other_item_name).paginate(page, app.config['RESULTS_PER_PAGE'], False)
 
@@ -425,14 +425,14 @@ def search_inventory():
 
 # Allows you to edit items in the inventory database. When you click on the Edit link,
 # It renders an Edit Form to allow you to edit the specific item.
-@app.route('/edit_inventory/<string:other_item_name>', methods=['GET', 'POST'])
+@app.route('/edit_inventory/<int:ids>', methods=['GET', 'POST'])
 @login_required
-def edit_inventory(other_item_name):
-    record = Other.query.filter_by(other_item_name=other_item_name).first()
+def edit_inventory(ids):
+    record = Other.query.filter_by(others_id=ids).first()
     if record:
         form = InventoryForm(formdata=request.form, obj=record)
         if form.validate_on_submit():
-            inventory = Other.query.filter_by(other_item_name=other_item_name).first()
+            inventory = Other.query.filter_by(others_id=ids).first()
             inventory.other_item_name = form.other_item_name.data
             inventory.other_serial_number = form.other_serial_number.data
             inventory.other_asset_tag = form.other_asset_tag.data
@@ -445,12 +445,12 @@ def edit_inventory(other_item_name):
         return render_template('edit_inventory.html', title='Edit Item', form=form, record=record)
 
 # Use this function to delete a specific item in your database.
-@app.route('/delete_inventory/<string:other_item_name>', methods=['GET', 'POST'])
+@app.route('/delete_inventory/<int:ids>', methods=['GET', 'POST'])
 @login_required
-def delete_inventory(other_item_name):
+def delete_inventory(ids):
     if isinstance(Admin.query.filter_by(user=current_user.username).first(), Admin):
         admin = Admin.query.filter_by(user=current_user.username).first()
-        deleted = Other.query.filter_by(other_item_name=other_item_name).first()
+        deleted = Other.query.filter_by(others_id=ids).first()
         admin.delete_item(deleted)
         app.logger.info('[Committed by user]: ' + str(current_user.username) + ' Changed to: ' +
                         '[Item]: ' + str(deleted.other_item_name) + ' was deleted')
@@ -558,7 +558,8 @@ def add_toner():
 @login_required
 def search_toner():
     page = request.args.get('page', 1, type=int)
-    results = db.session.query(Toner.toner_model,
+    results = db.session.query(Toner.toner_id,
+                               Toner.toner_model,
                                Toner.toner_cartridge,
                                Toner.toner_color,
                                Toner.toner_quantity)\
@@ -572,17 +573,17 @@ def search_toner():
                            next_url=next_url, prev_url=prev_url, results=results)
 
 # Allows you to edit a toner item
-@app.route('/edit_toner/<string:cartridge>', methods=['GET', 'POST'])
+@app.route('/edit_toner/<int:ids>', methods=['GET', 'POST'])
 @login_required
 def edit_toner(cartridge):
-    record = Toner.query.filter_by(toner_cartridge=cartridge).first()
+    record = Toner.query.filter_by(toner_id=ids).first()
 
     if record:
         form = TonerForm(formdata=request.form, obj=record)
 
 
         if form.validate_on_submit():
-            toner = Toner.query.filter_by(toner_cartridge=cartridge).first()
+            toner = Toner.query.filter_by(toner_ids=ids).first()
             toner.toner_model = form.toner_model.data
             toner.toner_cartridge = form.toner_cartridge.data
             toner.toner_color = form.toner_color.data
@@ -597,12 +598,12 @@ def edit_toner(cartridge):
         return render_template('edit_toner.html', title='Edit Toner', form=form, record=record)
 
 # Delete a toner from the database
-@app.route('/delete_toner/<string:cartridge>', methods=['GET', 'POST'])
+@app.route('/delete_toner/<int:ids>', methods=['GET', 'POST'])
 @login_required
-def delete_toner(cartridge):
+def delete_toner(ids):
     if isinstance(Admin.query.filter_by(user=current_user.username).first(), Admin):
         admin = Admin.query.filter_by(user=current_user.username).first()
-        deleted = Toner.query.filter_by(toner_cartridge=cartridge).first()
+        deleted = Toner.query.filter_by(toner_id=ids).first()
         admin.delete_toners(deleted)
         app.logger.info('[Committed by user]: ' + str(current_user.username) + ' Changed to: ' +
                         '[Toner Cartridge]: ' + str(deleted.toner_cartridge) + ' was deleted')
