@@ -507,7 +507,7 @@ def search_checkout():
                                CheckOut.checkout_item_name,
                                CheckOut.checkout_serial_number,
                                CheckOut.checkout_asset_tag)\
-        .order_by(CheckOut.checkout_username).paginate(page, app.config['RESULTS_PER_PAGE'], False)
+        .order_by(CheckOut.checkout_timestamp).paginate(page, app.config['RESULTS_PER_PAGE'], False)
     table = Checkout(results.items, border=True)
     next_url = url_for('search_checkout', page=results.next_num) if results.has_next else None
     prev_url = url_for('search_checkout', page=results.prev_num) if results.has_prev else None
