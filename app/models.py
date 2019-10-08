@@ -73,7 +73,7 @@ class Admin(db.Model):
         db.session.commit()
 
     def delete_admin(self, name):
-        db.session.delete(Admin.query.filter_by(user=name.user).first())
+        db.session.delete(Admin.query.filter_by(user=name.username).first())
         db.session.commit()
 
     def delete_users(self, name):
